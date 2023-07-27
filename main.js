@@ -1,6 +1,6 @@
 const form = document.getElementById('form-contato');
 const nomes = [];
-const numero = [];
+const numeros = [];
 
 let linhas = '';
 
@@ -9,7 +9,8 @@ form.addEventListener('submit', function(e) {
 
     adicionaLinha();
     atualizaTabela();
-})
+    atualizaContato();
+});
 
 function adicionaLinha() {
     const inputNomeContato = document.getElementById('nome-contato');
@@ -19,15 +20,16 @@ function adicionaLinha() {
         alert(`O contato ${inputNomeContato.value} já foi inserido`);
     } else {
         nomes.push(inputNomeContato.value);
-        contato.push(parseFloat(inputNumeroContato.value));
+        numeros.push(parseFloat(inputNumeroContato.value));
 
         let linha = '<tr>';
-        linha += `<td>${inputNomeContato,value}</td>`;
+        linha += `<td>${inputNomeContato.value}</td>`;
         linha += `<td>${inputNumeroContato.value}</td>`;
         linha += '</tr>';
 
         linhas += linha;
     }
+}
 
     function atualizaTabela() {
         const corpoTabela = document.querySelector('tbody');
@@ -38,8 +40,13 @@ function adicionaLinha() {
     function atualizaContato() {
         const contatoFinal = nomeNumeroadd();
 
-        document.getElementById('add-nome').innerHTML = addNome;
-        document.getElementById('add-numero').innerHTML = addNumero.toFixed(11);
+        document.getElementById('add-nome').innerHTML = contatoFinal.nome;
+        document.getElementById('add-numero').innerHTML = contatoFinal.numero.toFixed(11);
     }
 
-}
+    function nomeNumeroAdd(){
+        const nome = nomes[nomes.length - 1];
+        const numero = numeros[numeros.length - 1];
+        return { nome, numero };
+    }
+
